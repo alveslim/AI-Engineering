@@ -37,11 +37,19 @@ def separar_texto_em_blocos(texto_pdf):
     return lista_blocos
 
 lista_blocos = separar_texto_em_blocos(texto_pdf)
-print(len(lista_blocos))
-print(lista_blocos[0])
+#print(len(lista_blocos))
+#print(lista_blocos[0])
+
+#Embedding
+def criar_banco_vetores(lista_blocos):
+    ferramenta_embeddings = OpenAIEmbeddings(model="text-embedding-3-small")
+    banco_vetores = FAISS.from_documents(lista_blocos, ferramenta_embeddings)
+    return banco_vetores
+
+banco_vetores = criar_banco_vetores(lista_blocos)
 
 
-def criar_chain_agente():
+def criar_chain_agente(banco_vetores):
     
     prompt_template = ChatPromptTemplate.from_template(
         """Você é um assistente de RH que responde perguntas sobre políticas internas da empresa.
@@ -53,12 +61,14 @@ def criar_chain_agente():
     Resposta:
     """)
     
-    def criar_contexto(prompt_usuario):
-        return "Politicas internas da empresa: Home Office 100%."
+    #def criar_contexto(prompt_usuario):
+    #    retriever = banco_vetores.as_retriever()
+    #    return "Politicas internas da empresa: Home Office 100%."
     
+    buscador_contexto = banco_vetores.as_retriever()
     llm = ChatOpenAI(model="gpt-4o-mini")
     
-    chain = ({"context": criar_contexto, "question": RunnablePassthrough()} 
+    chain = ({"context": buscador_contexto, "question": RunnablePassthrough()} 
              | prompt_template 
              | llm # {model: gpt-4o-mini, tokens_usados: 150, tokens_resposta=400, a resposta: "resposta tal"}
              | StrOutputParser() # extrai a resposta do LLM
@@ -72,7 +82,7 @@ def criar_chain_agente():
 st.title("Assistente RAG — Políticas Internas")
 
 # carregar chain e vector store
-chain = criar_chain_agente()
+chain = criar_chain_agente(banco_vetores)
 
 # inicia a lista de mensagens
 if "messages" not in st.session_state:
