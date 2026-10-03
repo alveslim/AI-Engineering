@@ -6,7 +6,21 @@ Assistente RAG de Políticas Internas (RH)
 - OpenAI (embeddings + LLM)
 """
 
+# Sistema RAG
+# Embeddings: OpenAIEmbeddings --> busca de informações relevantes
+
+
 import streamlit as st
+from dotenv import load_dotenv
+from langchain_community.document_loaders import PyPDFLoader
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+from langchain_community.vectorstores import FAISS
+from langchain_openai import OpenAIEmbeddings, ChatOpenAI
+from langchain_core.prompts import PromptTemplate
+from langchain_core.runnables import RunnablePassthrough
+from langchain_core.output_parsers import StrOutputParser
+
+load_dotenv()
 
 
 # ============================================================
