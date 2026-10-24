@@ -17,6 +17,16 @@ Projetos de assistentes conversacionais que consultam um documento PDF de polít
 
 Os prompts orientam o assistente a responder em português e a informar quando não encontrar a resposta no contexto, reduzindo respostas sem suporte documental. Isso não substitui validação humana nem garante ausência de erros.
 
+### 🌐 Projetos web com IA
+
+Aplicações web voltadas à saúde, publicadas na Vercel, que incorporam recursos de inteligência artificial.
+
+- **[Segurança do Paciente](https://seguranca-do-paciente.vercel.app/)** — site com informações, boas práticas e os seis protocolos de segurança do paciente, voltado a profissionais, instituições de saúde e pacientes. Conta com o **Assistente de Saúde**, um chatbot com IA que responde dúvidas sobre protocolos e cuidados.
+- **[Além do Novembro Azul](https://alem-do-novembro-azul.vercel.app/)** — site sobre a fisioterapia no tratamento do câncer de próstata e na recuperação da funcionalidade, com vídeos explicativos, relatos de pacientes e orientações de profissionais de saúde, incorporando recursos de IA.
+- **OrthoTest** — projeto em desenvolvimento, que também contará com recursos de IA. *(link em breve)*
+
+> Os conteúdos desses projetos têm caráter informativo e não substituem a avaliação de profissionais de saúde.
+
 ### 📓 Notebooks de estudo
 
 A pasta [Notebooks](./Notebooks/) reúne experimentos e materiais de aprendizado, incluindo:
